@@ -1,5 +1,6 @@
 VAR_FILE ?= values.tfvars
 STATE_FILE ?= terraform.tfstate
+CLUSTER_NAME ?= terraform-eks-demo
 
 default: setup
 
@@ -7,10 +8,10 @@ init:
 	awsudo -u eks terraform init
 
 plan:
-	awsudo -u eks terraform plan -var-file="$(VAR_FILE)"
+	awsudo -u eks terraform plan -var-file="$(VAR_FILE)" -var cluster_name="$(CLUSTER_NAME)"
 
 apply:
-	awsudo -u eks terraform apply -var-file="$(VAR_FILE)" -state="$(STATE_FILE)" -lock=false
+	awsudo -u eks terraform apply -var-file="$(VAR_FILE)" -var cluster_name="$(CLUSTER_NAME)" -state="$(STATE_FILE)" -lock=false
 
 output:
 	awsudo -u eks terraform output
