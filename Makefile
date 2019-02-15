@@ -19,5 +19,20 @@ output:
 config:
 	awsudo -u eks terraform output config_map_aws_auth > config_map_aws_auth.yml
 
+update:
+	awsudo -u eks aws eks update-kubeconfig --name "$(CLUSTER_NAME)"
+
+auth:
+	kubectl apply -f config_map_aws_auth.yml
+
+verify:
+	kubectl get nodes
+
 destroy:
 	awsudo -u eks terraform destroy -var-file="$(VAR_FILE)"
+
+all:
+	$(MAKE) apply
+	$(MAKE) update
+	$(MAKE) auth
+	$(MAKE) verify

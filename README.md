@@ -13,6 +13,8 @@ Basic knowledge of AWS, Kubernetes and Terraform is required to use this script 
 
 `aws-sudo` enables you to authenticate against AWS with a specific profile. This is particularly useful if you manage credentials for different AWS accounts on the same computer. Follow instructions on the [aws-sudo](https://github.com/makethunder/awsudo) page to setup a profile and call it the `eks-demo` profile.
 
+Make sure you have the latest version of `aws-cli` installed.
+
 There are [detailed steps](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) in AWS docs that walk you through how to properly setup credentials for `aws-cli`.
 
 ## Commands
@@ -22,6 +24,8 @@ There are [detailed steps](https://docs.aws.amazon.com/cli/latest/userguide/cli-
 | `make init` | Initialize terraform. Must be run once. |
 | `make plan` | Plan changes to AWS infrastructure. |
 | `make apply` | Apply changes to AWS infrastructure. You will be prompted to proceed before actual changes are applied. This could take up to 10 minutes if you are doing this for the first time. |
+| `make update` | Automatically update your kube config in ~/.kube/config or the path set with environment variable `KUBECONFIG`. |
+| `make auth` | Add aws authentication details to local Kubernetes configuration |
 | `make output` | Retrieve output of the most recently applied changes. |
 | `make destroy` | Delete all infrastructure. |
 
@@ -29,11 +33,8 @@ There are [detailed steps](https://docs.aws.amazon.com/cli/latest/userguide/cli-
 
 ## Setting up the cluster
 
-- Run `make init`.
-- Run `make apply`.
-- Run `make config`. This creates config_map_aws_auth.yml in this folder.
-- Run `kubectl apply -f config_map_aws_auth.yml`.
-- Verify the worker nodes are joining the cluster by running `kubectl get nodes --watch`.
+- Run `make init`
+- Run `make all`
 
 # License
 
