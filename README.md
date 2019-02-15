@@ -36,6 +36,10 @@ There are [detailed steps](https://docs.aws.amazon.com/cli/latest/userguide/cli-
 - Run `make init`
 - Run `make all`
 
+If the later command displays a table listing two pods, this means your setup was completed successfully.
+
+Feel free to open an issue should you face any challenges.
+
 # License
 
 MIT License
